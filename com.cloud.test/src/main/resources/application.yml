@@ -1,0 +1,49 @@
+spring:
+   application:
+      name: iot-server-system2
+   profiles:
+      active: test
+   jackson:
+      date-format: yyyy-MM-dd HH:mm:ss
+      time-zone: GMT+8
+      default-property-inclusion: non_null
+   servlet:
+      multipart:
+         max-file-size: 100MB
+         max-request-size: 100MB
+         enabled: true
+---
+ribbon:
+   eureka:
+      enabled: true
+   ReadTimeout: 60000
+   ConnectTimeout: 60000
+   MaxAutoRetries: 1
+   MaxAutoRetriesNextServer: 1
+   OkToRetryOnAllOperations: false
+hystrix:
+   threadpool:
+      default:
+         coreSize: 1000 ##并发执行的最大线程数，默认10
+         maxQueueSize: 1000 ##BlockingQueue的最大队列数
+         queueSizeRejectionThreshold: 500 ##即使maxQueueSize没有达到，达到queueSizeRejectionThreshold该值后，请求也会被拒绝
+   command:
+      default:
+         execution:
+            isolation:
+               thread:
+                  timeoutInMilliseconds: 60000
+---
+spring:
+   profiles: test # 指定profile=peer1
+eureka:
+   instance:
+      status-page-url: http://${spring.cloud.client.ip-address}:${server.port}/swagger-ui.html
+      prefer-ip-address: true
+      lease-renewal-interval-in-seconds: 5
+      lease-expiration-duration-in-seconds: 20
+      instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+   client:
+      serviceUrl:
+         defaultZone: http://127.0.0.1:8761/eureka/
+      registry-fetch-interval-seconds: 10

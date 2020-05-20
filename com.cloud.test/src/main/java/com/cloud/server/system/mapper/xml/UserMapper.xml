@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cloud.server.system.mapper.UserMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap"
+		type="com.cloud.server.system.entity.User">
+		<result column="id" property="id" />
+		<result column="creator" property="creator" />
+		<result column="create_time" property="createTime" />
+		<result column="dr" property="dr" />
+		<result column="username" property="username" />
+		<result column="password" property="password" />
+		<result column="name" property="name" />
+		<result column="birthday" property="birthday" />
+		<result column="address" property="address" />
+		<result column="tel_phone" property="telPhone" />
+		<result column="email" property="email" />
+		<result column="sex" property="sex" />
+		<result column="status" property="status" />
+		<result column="description" property="description" />
+		<result column="pass_type" property="passType" />
+		<result column="head_url" property="headUrl" />
+	</resultMap>
+
+	<select id="getById"
+		resultType="com.cloud.server.system.entity.User">
+		select * from base_user where id=#{id}
+	</select>
+</mapper>

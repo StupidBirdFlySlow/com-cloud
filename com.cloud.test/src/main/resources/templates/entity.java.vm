@@ -1,0 +1,55 @@
+package ${package.Entity};
+import com.baomidou.mybatisplus.annotations.TableField;
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.annotations.TableName;
+import com.baomidou.mybatisplus.enums.IdType;
+import io.swagger.annotations.ApiModelProperty;
+import com.cloud.server.base.BaseVo;
+import lombok.Data;
+/**
+ * <p>
+ * ${table.comment}
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+@TableName("${table.name}")
+@Data
+public class ${entity}  extends BaseVo{
+private static final long serialVersionUID=1L;
+
+#foreach($field in ${table.fields})
+    /**
+     * ${field.comment}
+     */
+    #if(${field.keyFlag})
+    ## 主键
+#if(${field.keyIdentityFlag})
+@TableId(value = "${field.name}", type = IdType.UUID)
+    private ${field.propertyType} ${field.propertyName};
+#elseif(!$null.isNull(${idType}) && "$!idType" != "")
+@TableId(value = "${field.name}", type = IdType.${idType})
+    private ${field.propertyType} ${field.propertyName};
+#elseif(${field.convert})
+@TableId("${field.name}")
+    private ${field.propertyType} ${field.propertyName};
+#end
+    ## 普通字段
+    #elseif(${field.fill})
+    ## -----   存在字段填充设置   -----
+    #if(${field.convert})
+    @TableField(value = "${field.name}", fill = FieldFill.${field.fill})
+    #else
+    @TableField(fill = FieldFill.${field.fill})
+    #end
+    #end
+    #if(!${field.keyIdentityFlag})
+    @TableField(value = "${field.name}")
+      @ApiModelProperty(value="${field.comment}", example="${field.comment}")
+    private ${field.propertyType} ${field.propertyName};
+    #end
+
+#end
+
+}

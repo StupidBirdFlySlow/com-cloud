@@ -1,0 +1,84 @@
+package ${package.Controller};
+
+import org.springframework.web.bind.annotation.RequestMapping;
+#if(${restControllerStyle})
+import org.springframework.web.bind.annotation.RestController;
+#end
+#if(${superControllerClassPackage})
+import ${superControllerClassPackage};
+#end
+import ${package.Service}.${table.serviceName};
+import ${package.Entity}.${entity};
+import com.cloud.server.base.BaseQueryVo;
+import com.cloud.server.bean.PageEntity;
+import com.cloud.server.exception.BusinessRuntimeException;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import io.swagger.annotations.Api;
+/**
+ * <p>
+ * $!{table.comment} 前端控制器
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+@Api(description = "$!{table.comment} 接口")
+@RestController
+@RequestMapping("#if(${package.ModuleName})/${package.ModuleName}#end/#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}#end")
+#if(${kotlin})
+class ${table.controllerName}#if(${superControllerClass}) : ${superControllerClass}()#end
+
+#else
+#if(${superControllerClass})
+public class ${table.controllerName} extends ${superControllerClass} {
+#else
+public class ${table.controllerName} {
+#end
+	@Autowired
+	private ${table.serviceName} #if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}Service#end;
+/*	@PostMapping("page")
+    @ApiOperation("获取数据列表")
+	public PageEntity<${entity}> findListByPage(@RequestBody BaseQueryVo<${entity}> queryVo){
+                     return #if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}Service#end.queryPage(queryVo);	}
+	@ApiOperation("根据ID查找数据")
+	@GetMapping("/{id}")
+	public ${entity} find(@PathVariable("id") String id){
+		${entity} #if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}#end = #if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}Service#end.selectById(id);
+			if(#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}#end==null){
+			throw new BusinessRuntimeException("查询不到此id的数据");
+			}
+			return #if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}#end;
+	}
+
+	@ApiOperation("添加数据")
+	@PostMapping
+	public ${entity} addItem(@RequestBody ${entity} #if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}#end){
+			boolean isOk = #if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}Service#end.insert(#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}#end);
+			if(isOk){
+			return #if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}#end;
+			}
+			throw new BusinessRuntimeException("新增失败！");
+	}
+
+	@ApiOperation("更新数据")
+	@PutMapping
+	public ${entity} updateItem(@RequestBody ${entity} #if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}#end){
+		boolean isOk = #if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}Service#end.updateById(#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}#end);
+		if(isOk){
+		return #if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}#end;
+		}
+		throw new BusinessRuntimeException("更新失败！");
+	}
+
+	@ApiOperation("删除数据")
+	@DeleteMapping("{id}")
+	public void deleteItem(@PathVariable("id") String id){
+		boolean isOk = #if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}Service#end.deleteById(id);
+		if(!isOk){
+		throw new BusinessRuntimeException("数据删除失败");
+		}
+		}*/
+	}
+	#end
