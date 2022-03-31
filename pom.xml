@@ -40,7 +40,7 @@
 		<sharding-jdbc-core-spring-boot-starter.version>2.0.1</sharding-jdbc-core-spring-boot-starter.version>
 		<velocity-engine-core.version>2.0</velocity-engine-core.version>
 		<kaptcha.version>0.0.9</kaptcha.version>
-		<spring-boot.version>2.0.3.RELEASE</spring-boot.version>
+		<spring-boot.version>2.5.12</spring-boot.version>
 		<lombok.version>1.16.20</lombok.version>
 		<mybatis-version>3.5.1</mybatis-version>
 	</properties>
